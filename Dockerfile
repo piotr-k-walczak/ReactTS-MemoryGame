@@ -1,5 +1,5 @@
 # pull the base image
-FROM node:alpine
+FROM node:ubuntu
 
 # set the working direction
 WORKDIR /memory
@@ -18,4 +18,4 @@ RUN npm install
 COPY . ./
 
 # start app
-CMD ["npm", "start"]
+CMD ["npm", "start &"]
