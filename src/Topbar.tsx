@@ -12,7 +12,7 @@ function Topbar(props: Props) {
   const matchedText = useSelector((state: any) => {
     const puzzles = Object.values(state.puzzles);
     const matched = puzzles.filter((puzzle: any) => puzzle.takenOff);
-    return "Matched " + matched ? matched.length / 2 : 0 + " of " + puzzles ? puzzles.length / 2 : 0;
+    return "Matched " + (matched ? matched.length / 2 : 0) + " of " + (puzzles ? puzzles.length / 2 : 0);
   });
 
   const moves: number = useSelector((state: any) => state.moves);

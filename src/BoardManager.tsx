@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PuzzleType from "./types";
-import { addMove, flipPuzzles, setConfirmed, takeOffPuzzles } from "./actionCreators";
+import { addMove, flipPuzzles, resetMoves, setConfirmed, takeOffPuzzles } from "./actionCreators";
 import Board from "./Board";
 import PostgameAlert from "./PostgameAlert";
 
@@ -15,6 +15,10 @@ function ManagedBoard(layout: BoardLayout){
   const confirmed = useSelector((state: any) => state.confirmed);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetMoves())
+  }, [])
 
   function checkCorrect(flipped: PuzzleType[]) {
     if (flipped.length == 2) {
