@@ -6,8 +6,7 @@ pipeline {
     stages {
         stage('Git'){
             steps {
-                echo 'Pulling from repository...'
-                git 'https://github.com/jenkinsci/git-plugin'
+                checkout scm
             }
         }
         stage('Build') {
