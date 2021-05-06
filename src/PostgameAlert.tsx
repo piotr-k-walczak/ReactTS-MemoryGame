@@ -41,13 +41,15 @@ const StyledButton = styled.h2`
 type BoardLayout = { [key: number]: PuzzleType };
 
 const PostgameAlert: React.FC = () => {
-    const history = useHistory();
+  const history = useHistory();
+  
   const completed: boolean = useSelector((state: { puzzles: BoardLayout }) => {
     return (
       Object.values(state.puzzles).filter((puzzle) => !puzzle.takenOff)
         .length == 0
     );
   });
+
   const moves: number = useSelector((state: any) => state.moves);
 
   const { transform, opacity } = useSpring({
@@ -55,8 +57,6 @@ const PostgameAlert: React.FC = () => {
     transform: `translate(-50%, ${completed ? -50 : 0}%)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
-
-  const dispatch = useDispatch();
 
   return (
     <StyledAlert
@@ -68,13 +68,15 @@ const PostgameAlert: React.FC = () => {
       <h2>Congratulations</h2>
       <h2>You've finished the game in</h2>
       <h2>{moves} moves</h2>
-      <StyledButton
+      {
+        completed && <StyledButton
         onClick={() =>
           history.go(0)
         }
       >
         Wanna Play Again?
       </StyledButton>
+      }
     </StyledAlert>
   );
 };
