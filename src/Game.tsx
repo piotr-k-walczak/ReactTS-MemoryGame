@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { setPuzzles } from "./actionCreators";
 import ManagedBoard from "./BoardManager";
 import generatePuzzleLayout, { generatePuzzleLayoutByName } from "./generate";
-import { SmallCardsTheme } from "./themes";
 import PuzzleType from "./types";
 
 type BoardLayout = { [key: number]: PuzzleType };

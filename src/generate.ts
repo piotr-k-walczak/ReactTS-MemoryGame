@@ -1,28 +1,22 @@
 import { getRndInteger } from "./utils";
 import { PuzzleType } from "./types";
-import DefaultTheme, {
-  LargeCardsTheme,
-  MidCardsTheme,
-  SmallCardsTheme,
+import {
   Theme,
+  Themes,
+  themeToName
 } from "./themes";
 
 type BoardLayout = { [key: number]: PuzzleType };
 
 export function generatePuzzleLayoutByName(name: string): BoardLayout {
-  switch (name) {
-    case "smallCards": {
-      return generatePuzzleLayout(SmallCardsTheme);
+  Themes.forEach(theme => {
+    if (themeToName(theme) == name){
+      console.log(name);
+      console.log(themeToName(theme));
+        return generatePuzzleLayout(theme);
     }
-    case "midCards": {
-      return generatePuzzleLayout(MidCardsTheme);
-    }
-    case "fullCards": {
-      return generatePuzzleLayout(LargeCardsTheme);
-    }
-    default:
-      return generatePuzzleLayout(DefaultTheme);
-  }
+  })
+  return generatePuzzleLayout(Themes[0]);
 }
 
 export function generatePuzzleLayout(params: Theme): BoardLayout {

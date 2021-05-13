@@ -1,6 +1,7 @@
 import { getRandomElements } from "./utils";
 
 export type Theme = {
+  name: string;
   size: number;
   back: string;
   puzzles: string[];
@@ -67,24 +68,27 @@ const Cards = [
     "AS.png"
 ]
 
-export const SmallCardsTheme = {
+export const SmallerTheme = {
+    name: "cards",
     size: 8,
     back: getRandomElements(CardBacks, 1)[0],
-    puzzles: getRandomElements(Cards, 10)
+    puzzles: getRandomElements(Cards, 8)
 }
 
-export const MidCardsTheme = {
-    size: 12,
-    back: getRandomElements(CardBacks, 1)[0],
-    puzzles: getRandomElements(Cards, 20)
-}
-
-export const LargeCardsTheme = {
+export const LargerTheme = {
+    name: "cards",
     size: 15,
     back: getRandomElements(CardBacks, 1)[0],
-    puzzles: getRandomElements(Cards, 32)
+    puzzles: getRandomElements(Cards, 15)
 }
 
-export const DefaultTheme = LargeCardsTheme;
+export const Themes = [
+    SmallerTheme,
+    LargerTheme
+]
 
-export default DefaultTheme;
+export function themeToName(theme: Theme){
+    return theme.name + "_" + theme.size;
+}
+
+export default Themes[0];
