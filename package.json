@@ -15,6 +15,7 @@
     "react": "^17.0.2",
     "react-card-flip": "^1.1.0",
     "react-dom": "^17.0.2",
+    "react-height": "^3.0.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.3",
     "react-router": "^5.2.0",
@@ -22,6 +23,7 @@
     "react-scripts": "4.0.2",
     "react-spring": "^8.0.27",
     "redux": "^4.0.5",
+    "serve": "^11.3.2",
     "styled-components": "^5.2.1",
     "typescript": "^4.2.3",
     "web-vitals": "^1.1.1"

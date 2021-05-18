@@ -56,3 +56,24 @@ export const addMove = () => {
       payload: null,
     };
   };
+
+  export const setBoardHeight = (h: number) => {
+    return {
+      type: "board/setHeight",
+      payload: h
+    }
+  }
+
+  export const setBoardWidth = (w: number) => {
+    return {
+      type: "board/setWidth",
+      payload: w
+    }
+  }
+
+  export const setBoardSize = (size: {width: number, height: number}) => {
+    return {
+      type: "board/setWidth",
+      payload: size
+    }
+  }

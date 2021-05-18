@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import MainPage from "./MainPage";
 import Game from "./Game";
+import { Themes, themeToName } from "./themes";
 
 function App() {
   return (
@@ -18,10 +19,15 @@ function App() {
           <Route exact path="/">
             <MainPage />
           </Route>
-          <Route path="/:theme">
-            <Topbar inGame={true} />
-            <Game />
-          </Route>
+          {
+            Themes.map(theme => {
+              console.log(themeToName(theme))
+              return <Route path={"/" + themeToName(theme)}>
+                <Topbar inGame={true} />
+                <Game />
+            </Route>
+            })
+          }
           <Route path="/*">
             <Redirect to="/" />
           </Route>
