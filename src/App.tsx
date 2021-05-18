@@ -21,7 +21,6 @@ function App() {
           </Route>
           {
             Themes.map(theme => {
-              console.log(themeToName(theme))
               return <Route path={"/" + themeToName(theme)}>
                 <Topbar inGame={true} />
                 <Game />

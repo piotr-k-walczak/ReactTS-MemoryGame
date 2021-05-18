@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import useWindowDimensions from "./useWindowDimensions";
 
 const BoardGrid = styled.div<boardParams>`
+  width: ${(p) => p.width}px;
+  height: ${(p) => p.height}px;
   display: grid;
   align-items: center;
   align-content: center;
@@ -13,13 +15,16 @@ const BoardGrid = styled.div<boardParams>`
   gap: 20px;
   box-sizing: border-box;
   padding: 20px;
-  grid-template-columns: repeat(${p => p.rowLength}, auto);
+  grid-template-columns: repeat(${(p) => p.rowLength}, auto);
   grid-auto-flow: row;
+  border: 2px solid white;
 `;
 
 interface boardParams {
-  onClick: any,
-  rowLength: number
+  onClick: any;
+  rowLength: number;
+  width: number;
+  height: number;
 }
 
 type BoardLayout = { [key: number]: PuzzleType };
@@ -32,31 +37,34 @@ const Board: React.FC<BoardParams> = (props: BoardParams) => {
     (state: { puzzles: BoardLayout }) => state.puzzles
   );
 
-  const {height, width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
-  const PUZZLE_PIECE: {h: number, w: number} = {h: 100, w: 130};
+  const maxHeight = useSelector(
+    (state: { height: number }) =>
+      state.height
+  );
+
+  const PUZZLE_PIECE: { h: number; w: number } = { h: 100, w: 130 };
   const PADDING = 10;
 
   const maxX = width / (PUZZLE_PIECE.w + PADDING);
 
-  const numberOfPieces = Object.values(layout).length
+  const numberOfPieces = Object.values(layout).length;
   const ideal = Math.sqrt(numberOfPieces);
-  
 
   let columns;
 
-  if (ideal > maxX || ideal < 0){
+  if (ideal > maxX || ideal < 0) {
     columns = maxX;
-  } 
-  else {
+  } else {
     columns = ideal;
   }
-  console.log(columns)
+  console.log(columns);
 
   return (
-    <BoardGrid onClick={onClick} rowLength={Math.ceil(columns)}>
+    <BoardGrid onClick={onClick} rowLength={Math.ceil(columns)} width={width} height={maxHeight}>
       {Object.values(layout).map((puzzle) => (
-        <PuzzlePiece {...puzzle} />
+        <PuzzlePiece {...puzzle} w={100} h={130}/>
       ))}
     </BoardGrid>
   );

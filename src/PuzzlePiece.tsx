@@ -5,9 +5,9 @@ import styled from "styled-components";
 import {PuzzleType} from "./types";
 import { updatePuzzle } from "./actionCreators";
 
-const StyledPiece = styled(a.div)`
-  width: 100px;
-  height: 130px;
+const StyledPiece = styled(a.div)<PieceProps>`
+  width: ${p => p.w}px;
+  height: ${p => p.h}px;
   cursor: pointer;
   backface-visibility: hidden;
   webkit-backface-visibility: hidden;
@@ -20,6 +20,11 @@ const StyledPiece = styled(a.div)`
   background-size: 100% 100%;
 `;
 
+type PieceProps = {
+  h: number,
+  w: number
+}
+
 const PuzzleContainer = styled(a.div)`
   display: grid;
   & > div {
@@ -29,7 +34,7 @@ const PuzzleContainer = styled(a.div)`
 
 type BoardLayout = { [key: number]: PuzzleType };
 
-function PuzzlePiece(props: PuzzleType) {
+function PuzzlePiece(props: PuzzleType & PieceProps) {
   const puzzleDetails = useSelector(
     (state: any) => state.puzzles[props.uniqueId]
   );
@@ -67,6 +72,8 @@ function PuzzlePiece(props: PuzzleType) {
       style={{ opacity, pointerEvents: !puzzleDetails.takenOff ? "auto" : "none" }}
     >
       <StyledPiece
+        w={props.w}
+        h={props.h}
         style={{
           zIndex: 2,
           transform,
@@ -74,6 +81,8 @@ function PuzzlePiece(props: PuzzleType) {
         }}
       />
       <StyledPiece
+        w={props.w}
+        h={props.h}
         style={{
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
           backgroundImage: `url("/assets/${puzzleDetails.imageSrc}")`,
