@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import StyledLink, { StyledButton } from "./StyledText";
-import { setBoardHeight, setBoardSize } from "./actionCreators";
+import { setBoardHeight } from "./actionCreators";
 import useWindowDimensions from "./useWindowDimensions";
 import ReactHeight from "react-height";
 
@@ -77,8 +77,12 @@ function Topbar(props: Props) {
   
   const { height } = useWindowDimensions();
 
+  const [elementHeight, setEHeight] = useState<number>(0);
+
+  useEffect(() => { dispatch(setBoardHeight(height - elementHeight)) }, [height, elementHeight])
+
   return (
-    <ReactHeight onHeightReady={(h:number) => dispatch(setBoardHeight(height - h))}>
+    <ReactHeight onHeightReady={(h:number) => setEHeight(h)}>
       <StyledTopbar>
         <StyledLogoLink to="/" style={{fontWeight:'bold', fontSize:'1.1em'}}>Memory Game</StyledLogoLink>
         {props.inGame && (

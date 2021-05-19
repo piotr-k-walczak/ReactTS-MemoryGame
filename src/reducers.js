@@ -3,7 +3,7 @@ const initialState = {
   confirmed: false,
   puzzles: {},
   moves: 0,
-  height: 0,
+  height: 0
 };
 
 export default function appReducer(state = initialState, action) {

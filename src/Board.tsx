@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import PuzzlePiece from "./PuzzlePiece";
 import PuzzleType from "./types";
@@ -17,7 +17,6 @@ const BoardGrid = styled.div<boardParams>`
   padding: 20px;
   grid-template-columns: repeat(${(p) => p.rowLength}, auto);
   grid-auto-flow: row;
-  border: 2px solid white;
 `;
 
 interface boardParams {
@@ -39,32 +38,45 @@ const Board: React.FC<BoardParams> = (props: BoardParams) => {
 
   const { width } = useWindowDimensions();
 
-  const maxHeight = useSelector(
-    (state: { height: number }) =>
-      state.height
-  );
+  const height = useSelector((state: { height: number }) => state.height);
 
-  const PUZZLE_PIECE: { h: number; w: number } = { h: 100, w: 130 };
   const PADDING = 10;
-
-  const maxX = width / (PUZZLE_PIECE.w + PADDING);
+  const [PUZZLE_PIECE, setPuzzleSize] = useState<{ h: number; w: number }>({ h: 100, w: 130 });
 
   const numberOfPieces = Object.values(layout).length;
-  const ideal = Math.sqrt(numberOfPieces);
+  const columns = Math.ceil(Math.sqrt(numberOfPieces));
+  const rows = Math.ceil(numberOfPieces / columns);
 
-  let columns;
 
-  if (ideal > maxX || ideal < 0) {
-    columns = maxX;
-  } else {
-    columns = ideal;
+  function updatePieceSize(){
+    if (PUZZLE_PIECE.w <= 0 || PUZZLE_PIECE.h <= 0 || columns * (PUZZLE_PIECE.w + 2 * PADDING) + 2 * PADDING > width) {
+      const newW = (width - 2 * PADDING * (columns + 1)) / columns;
+      const newH = newW * 1.3;
+      setPuzzleSize({ h: newH, w: newW });
+    }
+  
+    if (PUZZLE_PIECE.w <= 0 || PUZZLE_PIECE.h <= 0 || rows * (PUZZLE_PIECE.h + 2 * PADDING) + 2 * PADDING > height) {
+      const newH = (height - 2 * PADDING) / rows - 2 * PADDING;
+      const newW = newH / 1.3;
+      setPuzzleSize({ h: newH, w: newW });
+    }
   }
-  console.log(columns);
 
+  useEffect(() => updatePieceSize())
+
+  useMemo(() => updatePieceSize(), [width, height])
+
+
+  useMemo(() => console.log(PUZZLE_PIECE), [PUZZLE_PIECE])
   return (
-    <BoardGrid onClick={onClick} rowLength={Math.ceil(columns)} width={width} height={maxHeight}>
+    <BoardGrid
+      onClick={onClick}
+      rowLength={Math.ceil(columns)}
+      width={width}
+      height={height}
+    >
       {Object.values(layout).map((puzzle) => (
-        <PuzzlePiece {...puzzle} w={100} h={130}/>
+        <PuzzlePiece {...puzzle} w={PUZZLE_PIECE.w} h={PUZZLE_PIECE.h} />
       ))}
     </BoardGrid>
   );
