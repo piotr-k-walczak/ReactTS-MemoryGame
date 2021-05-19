@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:16-alpine3.11
 
 RUN mkdir -p /memory
 
@@ -16,4 +16,4 @@ COPY . ./
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "build"]

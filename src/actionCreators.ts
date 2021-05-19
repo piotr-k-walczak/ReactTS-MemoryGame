@@ -44,15 +44,22 @@ export const setLastTheme = (theme: string) => {
 };
 
 export const addMove = () => {
-    return {
-      type: "game/addMove",
-      payload: null,
-    };
+  return {
+    type: "game/addMove",
+    payload: null,
   };
-  
-  export const resetMoves = () => {
-    return {
-      type: "game/resetMoves",
-      payload: null,
-    };
+};
+
+export const resetMoves = () => {
+  return {
+    type: "game/resetMoves",
+    payload: null,
   };
+};
+
+export const setBoardHeight = (h: number) => {
+  return {
+    type: "board/setHeight",
+    payload: h,
+  };
+};

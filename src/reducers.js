@@ -2,34 +2,35 @@ const initialState = {
   lastTheme: "default",
   confirmed: false,
   puzzles: {},
-  moves: 0
+  moves: 0,
+  height: 0
 };
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
-    case "lastTheme/setLastTheme":{
+    case "lastTheme/setLastTheme": {
       return {
         ...state,
-        lastTheme: action.payload
-      }
+        lastTheme: action.payload,
+      };
     }
-    case "game/setConfirmed":{
+    case "game/setConfirmed": {
       return {
         ...state,
-        confirmed: action.payload
-      }
+        confirmed: action.payload,
+      };
     }
-    case "game/addMove":{
+    case "game/addMove": {
       return {
         ...state,
-        moves: state.moves + 1
-      }
+        moves: state.moves + 1,
+      };
     }
-    case "game/resetMoves":{
+    case "game/resetMoves": {
       return {
         ...state,
-        moves: 0
-      }
+        moves: 0,
+      };
     }
     case "puzzles/setPuzzles": {
       return {
@@ -60,7 +61,7 @@ export default function appReducer(state = initialState, action) {
           [puzzleIds[1]]: {
             ...state.puzzles[puzzleIds[1]],
             isFlipped: false,
-          }
+          },
         },
       };
     }
@@ -79,8 +80,15 @@ export default function appReducer(state = initialState, action) {
             ...state.puzzles[puzzleIds[1]],
             takenOff: true,
             isFlipped: false,
-          }
+          },
         },
+      };
+    }
+    case "board/setHeight": {
+      const h = action.payload;
+      return {
+        ...state,
+        height: h,
       };
     }
     default:

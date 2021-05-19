@@ -39,11 +39,10 @@ const MainPage: React.FC = () => {
         justifyContent: "center",
         padding: "0 10vh",
         boxSizing: "border-box",
-        background: "linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.5) 100%)",
         flexWrap:"wrap"
       }}
     >
-      <StyledLink to="#" style={{fontSize: "50px", marginBottom: "20px", fontFamily:"'Josefin Sans', sans-serif"}}>Memory</StyledLink>
+      <StyledLink to="#" style={{fontSize: "35px", marginBottom: "20px", fontFamily:"'Josefin Sans', sans-serif"}}>Memory Puzzle</StyledLink>
       <StyledLogoLink to="/cards_8" style={{animationDelay:"2s"}} length={4}>8 PIECES</StyledLogoLink>
       <StyledLogoLink to="/cards_15" style={{animationDelay:"4s"}} length={3}>15 PIECES</StyledLogoLink>
     </div>

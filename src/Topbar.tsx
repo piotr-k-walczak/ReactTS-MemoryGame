@@ -1,8 +1,11 @@
 import styled from "styled-components"
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useReducer, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import StyledLink, { StyledButton } from "./StyledText";
+import { setBoardHeight } from "./actionCreators";
+import useWindowDimensions from "./useWindowDimensions";
+import ReactHeight from "react-height";
 
 type Props = {
   inGame: boolean;
@@ -70,23 +73,33 @@ function Topbar(props: Props) {
     history.go(0);
   };
 
+  const dispatch = useDispatch();
+  
+  const { height } = useWindowDimensions();
+
+  const [elementHeight, setEHeight] = useState<number>(0);
+
+  useEffect(() => { dispatch(setBoardHeight(height - elementHeight)) })
+
   return (
-    <StyledTopbar>
-      <StyledLogoLink to="/" style={{fontWeight:'bold', fontSize:'1.1em'}}>Memory Game</StyledLogoLink>
-      {props.inGame && (
-        <>
-          <div>
-            {moves}
-            {moves == 1 ? " move" : " moves"}
-          </div>
-          <div style={{ display: "flex" }}>
-            <div>{matchedText}</div>
-            <div style={{ borderLeft: "1px solid white", margin: "0 10px" }} />
-            <StyledButton onClick={handleRestart}>Restart</StyledButton>
-          </div>
-        </>
-      )}
-    </StyledTopbar>
+    <ReactHeight onHeightReady={(h:number) => setEHeight(h)}>
+      <StyledTopbar>
+        <StyledLogoLink to="/" style={{fontWeight:'bold', fontSize:'1.1em'}}>Memory Game</StyledLogoLink>
+        {props.inGame && (
+          <>
+            <div>
+              {moves}
+              {moves == 1 ? " move" : " moves"}
+            </div>
+            <div style={{ display: "flex" }}>
+              <div>{matchedText}</div>
+              <div style={{ borderLeft: "1px solid white", margin: "0 10px" }} />
+              <StyledButton onClick={handleRestart}>Restart</StyledButton>
+            </div>
+          </>
+        )}
+      </StyledTopbar>
+    </ReactHeight>
   );
 }
 
