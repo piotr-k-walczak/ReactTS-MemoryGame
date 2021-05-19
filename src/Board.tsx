@@ -41,7 +41,7 @@ const Board: React.FC<BoardParams> = (props: BoardParams) => {
   const height = useSelector((state: { height: number }) => state.height);
 
   const PADDING = 10;
-  const [PUZZLE_PIECE, setPuzzleSize] = useState<{ h: number; w: number }>({ h: 100, w: 130 });
+  const [PUZZLE_PIECE, setPuzzleSize] = useState<{ h: number; w: number }>({ w: 100, h: 130 });
 
   const numberOfPieces = Object.values(layout).length;
   const columns = Math.ceil(Math.sqrt(numberOfPieces));
@@ -50,13 +50,13 @@ const Board: React.FC<BoardParams> = (props: BoardParams) => {
 
   function updatePieceSize(){
     if (PUZZLE_PIECE.w <= 0 || PUZZLE_PIECE.h <= 0 || columns * (PUZZLE_PIECE.w + 2 * PADDING) + 2 * PADDING > width) {
-      const newW = (width - 2 * PADDING * (columns + 1)) / columns;
+      const newW = (width - 2 * PADDING * (columns + 2)) / columns;
       const newH = newW * 1.3;
       setPuzzleSize({ h: newH, w: newW });
     }
   
     if (PUZZLE_PIECE.w <= 0 || PUZZLE_PIECE.h <= 0 || rows * (PUZZLE_PIECE.h + 2 * PADDING) + 2 * PADDING > height) {
-      const newH = (height - 2 * PADDING) / rows - 2 * PADDING;
+      const newH = (height - 2 * PADDING * (rows + 2)) / rows;
       const newW = newH / 1.3;
       setPuzzleSize({ h: newH, w: newW });
     }

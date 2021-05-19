@@ -79,7 +79,7 @@ function Topbar(props: Props) {
 
   const [elementHeight, setEHeight] = useState<number>(0);
 
-  useEffect(() => { dispatch(setBoardHeight(height - elementHeight)) }, [height, elementHeight])
+  useEffect(() => { dispatch(setBoardHeight(height - elementHeight)) })
 
   return (
     <ReactHeight onHeightReady={(h:number) => setEHeight(h)}>
