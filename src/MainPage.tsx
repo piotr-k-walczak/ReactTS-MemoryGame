@@ -7,7 +7,7 @@ const StyledLogoLink = styled(StyledLink)<{length:number}>`
   background: -webkit-linear-gradient( 92deg, #95d7e3, #eb76ff );
   background-size:600vw 600vw;
   font-weigth: 900;
-  font-size: 120px;
+  font-size: 10vh;
   font-family: 'Josefin Sans', sans-serif;
 
   -webkit-background-clip: text;
@@ -42,7 +42,7 @@ const MainPage: React.FC = () => {
         flexWrap:"wrap"
       }}
     >
-      <StyledLink to="#" style={{fontSize: "35px", marginBottom: "20px", fontFamily:"'Josefin Sans', sans-serif"}}>Memory Puzzle</StyledLink>
+      <StyledLink to="#" style={{fontSize: "5vh", marginBottom: "20px", fontFamily:"'Josefin Sans', sans-serif"}}>Memory Puzzle</StyledLink>
       <StyledLogoLink to="/cards_8" style={{animationDelay:"2s"}} length={4}>8 PIECES</StyledLogoLink>
       <StyledLogoLink to="/cards_15" style={{animationDelay:"4s"}} length={3}>15 PIECES</StyledLogoLink>
     </div>

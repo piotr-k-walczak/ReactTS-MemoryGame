@@ -10,11 +10,16 @@ import {
 import MainPage from "./MainPage";
 import Game from "./Game";
 import { Themes, themeToName } from "./themes";
+import {Helmet} from "react-helmet"
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>Memory Online</title>
+        </Helmet>
         <Switch>
           <Route exact path="/">
             <MainPage />
