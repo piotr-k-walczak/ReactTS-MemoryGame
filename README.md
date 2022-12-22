@@ -1,16 +1,30 @@
-# Memory Puzzle Game (React + TypeScript)
+# Memory Puzzle Game (ReactTS)
 
-Simple memory puzzle game.
+---
 
-Available on: playmemory.net
+Personal project written in **[ 2021 ]** to learn React and TypeScript.
 
-## Run
+---
+
+#### Technologies
+
+- Language: **TypeScript**
+- Framework: **React**
+- Runtime: **Node**
+- Other: **Docker**, **Styled-components**, **React Springs**
+
+---
+
+#### Run
 Run using docker:
 ```
 docker run piotrkwalczak/memory:latest
 ```
-or
-```
-npm install
-npm start
-```
+
+---
+
+#### Description
+
+Simple puzzle game. Players goal to find matching pairs of cards. Less time and less move it takes, the better. There can be multiple difficulty levels chosen.
+
+
